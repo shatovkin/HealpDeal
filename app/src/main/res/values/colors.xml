@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBackgroundOnclick">#848484</color>
+    <color name="colorTitel">#848484</color>
+    <color name="colorBlue">#e1f5fe</color>
+    <color name="colorText">#ffff</color>
+    <color name="colorMenue">#017c9c</color>
+    <color name="colorMain">#08BBED</color>
+    <color name="colorContrast">#FF2300</color>
+    <color name="colorPopupActivities">#4ad8ff</color>
+
+    <!--<color name="colorMain">#08bded</color>-->
+
+</resources>

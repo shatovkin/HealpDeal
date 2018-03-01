@@ -1,0 +1,118 @@
+<resources >
+    <string name="app_name">HelpDeal</string>
+    <string name="add_textbox_hint">Add a ToDo item</string>
+    <string name="add_button_text">Add</string>
+    <string name="service_title">Mobile Apps </string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="checkbox_text">Item Text</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Menü Items-->
+    <string name="drawer_item_home">My Profile</string>
+    <string name="drawer_item_custom">Observer</string>
+    <string name="drawer_item_settings">Settings</string>
+    <string name="drawer_item_help">Help</string>
+    <string name="drawer_item_open_source">Open Source</string>
+    <string name="drawer_item_contact">My Contacts</string>
+
+    <!--Activities-->
+    <string name="title_activity_login_activity">Login</string>
+    <string name="title_activity_sing_in">Register</string>
+    <string name="birthday">Birthday</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="singIn_name">Name</string>
+    <string name="singIn_password">Password</string>
+    <string name="singIn_confirm_password">Confirm Password</string>
+    <string name="singIn_email">E-Mail</string>
+    <string name="singIn_birthday">Birthday</string>
+    <string name="singIn_firstname">Firstname</string>
+    <string name="singIn_button">Create Account</string>
+    <string name="searchViewText">Search....</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_firebase_acitivity">FirebaseAcitivity</string>
+
+
+    // Errors
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_password_not_confirm">The passwords are not confirm</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_email_exists">This email is already exist</string>
+    <string name="error_email_not_exists">E-Mail or password is not correct</string>
+    <string name="title_activity_sing_in_button">SingInButton</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_categorie_"></string>
+    <string name="title_activity_under_categorie_">UnderCategorie_Activity</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <!-- JobLayout-->
+
+    <string name="offer_text">Free text</string>
+    <string name="jobtitel">Job titel</string>
+    <string name="Job_description">Job description</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="btn_save_job">Save job</string>
+    <string name="subcategorie">Subcategories</string>
+    <string name="categorie">Categories</string>
+    <string name="savejob">The job will saved</string>
+
+    <string name="errorDate">Check the date format</string>
+    <string name="errorTitel">The titel is empty</string>
+    <string name="errorLongTitel">The titel is to long</string>
+    <string name="error_open_photo_from_gallery">Unable to open image</string>
+
+    <!--Categorien-->
+            <string-array name="array_list">
+                <item>Schönheit/Beaty</item>
+                <item>Handwerker</item>
+                <item>Haushaltshilfe</item>
+                <item>Web-/IT-Diensleistungen</item>
+            </string-array>
+            <string-array name="beauty_array">
+                <item>Haarentfernung</item>
+                <item>Friseur</item>
+                <item>Nagelpflege</item>
+                <item>Kosmetik</item>
+                <item>Massage</item>
+                <item>Welness und Sa</item>
+                <item>Körperpflege, gesichtspflege</item>
+            </string-array>
+            <string-array name="handwerker_array">
+                <item>Lackierer</item>
+                <item>Tapeten</item>
+                <item>Tischler</item>
+                <item>Badezimmer</item>
+                <item>Elektriker</item>
+                <item>Gärtner</item>
+                <item>Küchenbau</item>
+                <item>Maler</item>
+                <item>Maurer</item>
+                <item>Schreiner</item>
+                <item>Klempner</item>
+                <item>Renovierung</item>
+            </string-array>
+            <string-array name="haushaltshilfe_array">
+                <item>Putzhilfe</item>
+                <item>Gartenarbeiten</item>
+            </string-array>
+            <string-array name="webdienstleistungen_array">
+                <item>Grafikdesign</item>
+            </string-array>
+    <string name="title_activity_gallery">Gallery_Activity</string>
+    <string name="title_customerjob_activity">Customer Job</string>
+    <string name="title_activity_google_maps">Map</string>
+    <string name="title_activity_google">Google_Activity</string>
+    <string name="title_activity_user_profile_">UserProfile_Activity</string>
+    <string name="title_activity_observed_person_list_">ObservedPersonList_Activity</string>
+</resources>

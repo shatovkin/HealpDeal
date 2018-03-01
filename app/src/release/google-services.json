@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "339637969223",
+    "firebase_url": "https://helpdeal-e5eec.firebaseio.com",
+    "project_id": "helpdeal-e5eec",
+    "storage_bucket": "helpdeal-e5eec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339637969223:android:edab0c9ee796a9ac",
+        "android_client_info": {
+          "package_name": "com.example.dimitri.helpdeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339637969223-ehsdkj1sccj30mtte6c3l72dr7qpqjhg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxFbJuONWra5NqgVbWwI3Eh4MelYmAB3k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

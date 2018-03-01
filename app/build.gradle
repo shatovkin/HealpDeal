@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.example.dimitri.helpdeal"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        /* debug {
+            applicationIdSuffix '.debug'
+        }*/
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // <editor-fold defaultstate="collapsed" desc="Azure dependencies "> //map-style notation:
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="AppCompat Dependencies"> //map-style notation:
+    // </editor-fold>
+    compile('com.mikepenz.materialdrawer:library:0.9.5@aar') {
+        transitive = true
+
+    }
+    compile('com.mikepenz.materialdrawer:library:0.9.5@aar') {
+        transitive = true
+    }
+    //add library CornerLayouts
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.maps.android:android-maps-utils:0.4.+'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.microsoft.azure:azure-mobile-android:3.3.0@aar'
+    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.guava:guava:20.0'
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'junit:junit:4.12'
+    compile 'com.jcminarro:RoundKornerLayouts:0.2.0'
+    compile 'com.google.firebase:firebase-auth:9.0.0'
+    compile 'com.google.firebase:firebase-messaging:9.0.0'
+    compile 'com.google.android.gms:play-services:9.0.0'
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
+    compile 'com.google.android.gms:play-services-location:9.0.0'
+    compile 'com.microsoft.azure.android:azure-storage-android:0.8.0@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.7.2'
+}
+apply plugin: 'com.google.gms.google-services'
+
