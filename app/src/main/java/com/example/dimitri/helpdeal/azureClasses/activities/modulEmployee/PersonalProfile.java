@@ -189,6 +189,7 @@ public class PersonalProfile extends AppCompatActivity{
                     Log.d("TraceSQL:", "trace!!!:" + e.toString());
                 } catch (ExecutionException e) {
                     Log.d("TraceSQL:", "trace!!!:" + e.toString());
+                    Log.d("TraceSQL:", "trace!!!:" + e.toString());
                 }
                 return null;
             }
