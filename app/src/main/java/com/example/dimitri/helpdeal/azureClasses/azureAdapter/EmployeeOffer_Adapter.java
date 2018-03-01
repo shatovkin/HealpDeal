@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.dimitri.helpdeal.R;
@@ -45,7 +44,7 @@ public class EmployeeOffer_Adapter extends ArrayAdapter<BranchOfferView> {
         }
 
         final TextView txt_employee_name = (TextView) row.findViewById(R.id.txt_employee_name);
-        txt_employee_name.setText(branchOfferView.getUserFirstname()+" " + getCutName(branchOfferView.getUserName())+".");
+        txt_employee_name.setText(branchOfferView.getUserFirstname()+" " + branchOfferView.getUserName().substring(0,1)+".");
 
         final TextView job_Experience = (TextView) row.findViewById(R.id.txt_job_experience);
 
@@ -84,10 +83,6 @@ public class EmployeeOffer_Adapter extends ArrayAdapter<BranchOfferView> {
     }
 
 
-    protected void onListItemClick(ListView l, View v, int position, long id)
-    {
-        String s= "";
-    }
     private void calculateVarification(BranchOfferView offerView,View row) {
         int varificationCount = 0;
 
@@ -107,8 +102,6 @@ public class EmployeeOffer_Adapter extends ArrayAdapter<BranchOfferView> {
             ImageView imageMail = (ImageView) row.findViewById(R.id.pass_varification);
             imageMail.setImageResource(R.drawable.pass_checked);
         }
-       // TextView countCarification = (TextView) row.findViewById(R.id.txt_ranking_count);
-      //  countCarification.setText("Stufe " + varificationCount);
     }
 
     private void calculateRanking(int ranking, View row) {
@@ -143,21 +136,9 @@ public class EmployeeOffer_Adapter extends ArrayAdapter<BranchOfferView> {
             satisfaction.setText("Sehr gut");
             satisfaction.setTextColor(row.getResources().getColor(R.color.green_satisfaction));
         }
-
-      /*  TextView rankingText = (TextView) row.findViewById(R.id.txt_ranking);
-        rankingText.setText("" + ranking);*/
     }
 
     public int calculateRanking(BranchOfferView offerView) {
         return Integer.parseInt(offerView.getSummeOfRating()) / Integer.parseInt(offerView.getCountOfRating());
     }
-
-    private String getCutName(String name) {
-        return name.substring(0,1);
-    }
-
-    /* public static int rnd(int min, int max) {
-        max -= min;
-        return (int) (Math.random() * ++max) + min;
-    }*/
 }

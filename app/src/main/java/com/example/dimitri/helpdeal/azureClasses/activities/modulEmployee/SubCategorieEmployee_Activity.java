@@ -37,13 +37,14 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class SubCategorieEmployee_Activity extends AppCompatActivity {
+public class SubCategorieEmployee_Activity extends AppCompatActivity implements Serializable {
 
     private Drawer.Result drawerResult = null;
     private ListView listview_jobs;
@@ -105,8 +106,9 @@ public class SubCategorieEmployee_Activity extends AppCompatActivity {
                 .build();
         //endregion
 
-       if (!ConnectionToInternet.isNetworkConnected(this))
-       {Toast.makeText(this,"Check the connection to internet", Toast.LENGTH_LONG).show();}
+        if (!ConnectionToInternet.isNetworkConnected(this)) {
+            Toast.makeText(this, "Check the connection to internet", Toast.LENGTH_LONG).show();
+        }
 
         try {
             mClient = new MobileServiceClient("https://helpdeal.azurewebsites.net", SubCategorieEmployee_Activity.this).withFilter(progressFilter);
@@ -124,27 +126,24 @@ public class SubCategorieEmployee_Activity extends AppCompatActivity {
 
 
             mEmployeeOffers = mClient.getTable(BranchOfferView.class);
-
             mAdapter = new EmployeeOffer_Adapter(this, R.layout.row_list_employee_offer);
 
             listview_jobs = (ListView) findViewById(R.id.listof_jobs);
             listview_jobs.setAdapter(mAdapter);
-
             listview_jobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     BranchOfferView job = offerEmployeeList.get(position);
-                    Intent intent = new Intent(SubCategorieEmployee_Activity .this, PersonalProfile.class);
-                    intent.putExtra("personalProfileID", job.getEmp_user_id());
+                    Intent intent = new Intent(SubCategorieEmployee_Activity.this, PersonalProfile.class);
+                    intent.putExtra("personalProfileObject", job);
                     startActivity(intent);
                 }
             });
             showAll(listview_jobs, categorieIntent.getStringExtra("category"));
             //endregion
         } catch (
-                MalformedURLException e)
-        {
+                MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -161,11 +160,11 @@ public class SubCategorieEmployee_Activity extends AppCompatActivity {
                 final MobileServiceList<BranchOfferView> result;
                 //final MobileServiceList<Users> usersOfOffers;
                 try {
-                    result = mEmployeeOffers.where().field("emp_category").eq(category).select("id","emp_user_id", "emp_salary_per_hour",
-                                                                                                "emp_experience","u_firstname","u_name",
-                                                                                                "u_summe_of_rating","u_count_of_rating",
-                                                                                                "u_photo","u_var_email","u_var_phone",
-                                                                                                "u_var_pass").orderBy("createdAt", QueryOrder.Ascending).execute().get();
+                    result = mEmployeeOffers.where().field("emp_category").eq(category).select("id", "emp_user_id", "emp_salary_per_hour",
+                            "emp_experience", "u_firstname", "u_name",
+                            "u_summe_of_rating", "u_count_of_rating",
+                            "u_photo", "u_var_email", "u_var_phone",
+                            "u_var_pass").orderBy("createdAt", QueryOrder.Ascending).execute().get();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -233,6 +232,6 @@ public class SubCategorieEmployee_Activity extends AppCompatActivity {
         }
         return false;
     }
-    //endregion
+
 }
 

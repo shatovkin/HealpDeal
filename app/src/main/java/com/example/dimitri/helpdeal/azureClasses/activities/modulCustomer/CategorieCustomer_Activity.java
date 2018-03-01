@@ -29,8 +29,6 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CategorieCustomer_Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,21 +36,11 @@ public class CategorieCustomer_Activity extends AppCompatActivity implements Vie
     private ListView list;
     private SessionManager session;
 
-
-
-    String[] myResArray = getResources().getStringArray(R.array.array_list);
+    /*String[] myResArray = getResources().getStringArray(R.array.beauty_array);
     List<String> myResArrayList = Arrays.asList(myResArray);
-
-
-
-
-
-
-
+*/
     private String[] categories = {"Haarentfernung", "Handwerker", "Haushaltshilfe", "Web-/IT-Diensleistungen", "Web-/IT-Dienstleistungen", "Werkzeugmechaniker", "Umzugshilfe & Transport", "Konditor",
             "Notarfachangestellte", "Raumgestalter", "Schuster", "Tischler", "Werkzeugmechaniker"};
-
-
 
 
     Integer[] imgid = {R.drawable.altenpflegehelferin, R.drawable.gaertner, R.drawable.elektroniker_geraete_und_systeme, R.drawable.dachdecker, R.drawable.konditor,

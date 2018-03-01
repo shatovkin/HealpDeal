@@ -202,13 +202,15 @@ public class BranchOfferView implements Parcelable {
         firstname = in.readString();
         name = in.readString();
         email = in.readString();
-        email = in.readString();
         password = in.readString();
         index = in.readString();
         city = in.readString();
         street = in.readString();
         u_count_of_rating = in.readString();
         u_summe_of_rating = in.readString();
+        u_var_email = (in.readByte()!=0);
+        u_var_phone = (in.readByte()!=0);
+        u_var_pass =  (in.readByte()!=0);
         u_photo = in.readString();
     }
 
@@ -230,6 +232,9 @@ public class BranchOfferView implements Parcelable {
         dest.writeString(street);
         dest.writeString(u_count_of_rating);
         dest.writeString(u_summe_of_rating);
+        dest.writeByte((byte) (u_var_email ? 1:0));
+        dest.writeByte((byte)(u_var_phone ? 1:0));
+        dest.writeByte((byte)(u_var_pass ? 1:0));
         dest.writeString(u_photo);
     }
 

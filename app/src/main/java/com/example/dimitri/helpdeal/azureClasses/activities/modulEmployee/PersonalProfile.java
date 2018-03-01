@@ -22,6 +22,7 @@ import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.mikepenz.materialdrawer.Drawer;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Dimitri on 15.01.2018.
  */
 
-public class PersonalProfile extends AppCompatActivity{
+public class PersonalProfile extends AppCompatActivity {
 
     private Drawer.Result drawerResult = null;
     private MobileServiceClient mClient;
@@ -45,18 +46,20 @@ public class PersonalProfile extends AppCompatActivity{
     private ProgressBar progressBar;
     private SessionManager sessionManager;
     private String personalUserID;
+    private BranchOfferView personalData;
     private String observedPersonID;
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
+    private HashMap<String, List<String>> listHash;
     private BranchOfferView branchOfferView;
 
 
-    private TextView txt_name;
-    private ImageView bewertung;
+    private TextView txt_name,txt_preis;
+    private ImageView imagaView_bewertung;
     private TextView txt_bewertung;
+    private ImageView varification_email, varification_pass, varification_telefon,profilePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +69,38 @@ public class PersonalProfile extends AppCompatActivity{
         beobachten.setOnClickListener(this);*/
 
         txt_name = (TextView) findViewById(R.id.txt_name_persprofile);
-        bewertung =(ImageView) findViewById(R.id.bewertung) ;
+        txt_preis = (TextView) findViewById(R.id.preis);
+        imagaView_bewertung = (ImageView) findViewById(R.id.bewertung);
 
+        varification_email = (ImageView) findViewById(R.id.varification_email);
+        varification_pass = (ImageView) findViewById(R.id.varification_pass);
+        varification_telefon = (ImageView) findViewById(R.id.varification_telefon);
+        profilePhoto = (ImageView) findViewById(R.id.profilePhoto);
+
+        sessionManager = new SessionManager(this);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar_personalProfile);
+        progressFilter = new ProgressFilter(progressBar, this);
+
+        Bundle intent = getIntent().getExtras();
+        personalData = (BranchOfferView) intent.get("personalProfileObject");
+
+        txt_name.setText(personalData.getUserFirstname() + " " + personalData.getUserName().substring(0, 1) + ".");
+        txt_preis.setText(getString(R.string.preis_per_hour)+" "+ personalData.getEmp_salary_per_hour() +" €");
+        calculateRanking(personalData.getSummeOfRating(), personalData.getCountOfRating());
+        showVarification(personalData.getVarificationEmail(), personalData.getVarificationPass(), personalData.getVarificationPhone());
+        Picasso.with(this).load(personalData.getPhoto()).into(profilePhoto);
+
+        personalProfile = new ArrayList<BranchOfferView>();
 
         //region expandableList
         listView = (ExpandableListView) findViewById(R.id.expandableList);
         initData();
-        listAdapter  = new ExpandableListAdapter(this, listDataHeader,listHash);
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
 
 
-        int item_size =150;
+        int item_size = 150;
         final int sub_item_size = 150;
-        listView.getLayoutParams().height = item_size*listAdapter.getGroupCount();
+        listView.getLayoutParams().height = item_size * listAdapter.getGroupCount();
         listView.setAdapter(listAdapter);
 
         // ListView Group Expand Listener
@@ -85,7 +108,7 @@ public class PersonalProfile extends AppCompatActivity{
             @Override
             public void onGroupExpand(int groupPosition) {
                 int nb_children = listAdapter.getChildrenCount(groupPosition);
-                listView.getLayoutParams().height += sub_item_size*nb_children;
+                listView.getLayoutParams().height += sub_item_size * nb_children;
             }
         });
 
@@ -94,21 +117,10 @@ public class PersonalProfile extends AppCompatActivity{
             @Override
             public void onGroupCollapse(int groupPosition) {
                 int nb_children = listAdapter.getChildrenCount(groupPosition);
-                listView.getLayoutParams().height -= sub_item_size*nb_children;
+                listView.getLayoutParams().height -= sub_item_size * nb_children;
             }
         });
-       //endregion
-
-        sessionManager = new SessionManager(this);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar_personalProfile);
-        progressFilter = new ProgressFilter(progressBar, this);
-
-        Bundle intent = getIntent().getExtras();
-        personalUserID = (String) intent.get("personalProfileID");
-
-        personalProfile = new ArrayList<BranchOfferView>();
-
-
+        //endregion
 
         if (!ConnectionToInternet.isNetworkConnected(this)) {
             Toast.makeText(this, "Check the connection to internet", Toast.LENGTH_LONG).show();
@@ -141,7 +153,7 @@ public class PersonalProfile extends AppCompatActivity{
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
-        listDataHeader.add("About Sandra");
+        listDataHeader.add("About "+personalData.getUserFirstname());
         listDataHeader.add("Qualifications");
         listDataHeader.add("Service");
 
@@ -150,19 +162,19 @@ public class PersonalProfile extends AppCompatActivity{
         aboutSandra.add("* 20 Jahre alt");
         aboutSandra.add("* Liebe Eltern, mein Name ist Sandra, 20 Jahre alt. Ich habe noch keine Kinder, jedoch liebe ich die Kinder sehr.");
 
-        List<String> qualifications= new ArrayList<>();
+        List<String> qualifications = new ArrayList<>();
         qualifications.add("Erfahrung 5 Jahre");
         qualifications.add("Höchste Abschluss: Realschule");
         qualifications.add("Sprachen: Deutsch , Russisch");
 
-        List<String> service= new ArrayList<>();
+        List<String> service = new ArrayList<>();
         service.add("Ab €12 pro Stunde");
         service.add("Köln +10 km Umgebung");
         service.add("Gartenarbeiten \n - Reisebereitschaft\nHecken schneiden \n Rasen Vertikulieren");
 
-        listHash.put(listDataHeader.get(0),aboutSandra);
-        listHash.put(listDataHeader.get(1),qualifications);
-        listHash.put(listDataHeader.get(2),service);
+        listHash.put(listDataHeader.get(0), aboutSandra);
+        listHash.put(listDataHeader.get(1), qualifications);
+        listHash.put(listDataHeader.get(2), service);
     }
 
 
@@ -180,7 +192,7 @@ public class PersonalProfile extends AppCompatActivity{
                             for (BranchOfferView person : result) {
                                 setData(person);
                                 branchOfferView = person;
-                               // observedPersonID = person.getEmp_user_id();
+                                // observedPersonID = person.getEmp_user_id();
                             }
                         }
                     });
@@ -189,7 +201,6 @@ public class PersonalProfile extends AppCompatActivity{
                     Log.d("TraceSQL:", "trace!!!:" + e.toString());
                 } catch (ExecutionException e) {
                     Log.d("TraceSQL:", "trace!!!:" + e.toString());
-                    Log.d("TraceSQL:", "trace!!!:" + e.toString());
                 }
                 return null;
             }
@@ -197,47 +208,7 @@ public class PersonalProfile extends AppCompatActivity{
     }
 
     private void setData(BranchOfferView person) {
-
-        txt_name.setText(""+person.getUserFirstname()+" "+person.getUserName());
-
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-
-//        txt_name.setText( "pers:" +branchOfferView.getUserFirstname());
-
-
-    }
-
-    private void calculateRanking(String rank, String summe) {
-
-        int sum = Integer.parseInt(summe);
-        int ran = Integer.parseInt(rank);
-        int ranking = sum/ran;
-
-
-        if (ranking == 1) {
-            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
-            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_1);
-        } else if (ranking == 2) {
-            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
-            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_2);
-        } else if (ranking == 3) {
-            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
-            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_3);
-        } else if (ranking == 4) {
-            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
-            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_4);
-        } else if (ranking == 5) {
-            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
-            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_5);
-        }
-
-      /*  TextView rankingText = (TextView) row.findViewById(R.id.txt_ranking);
-        rankingText.setText("" + ranking);*/
+        txt_name.setText("" + person.getUserFirstname() + " " + person.getUserName());
     }
 
     private ObservedPerson createOberservedPerson() {
@@ -308,33 +279,41 @@ public class PersonalProfile extends AppCompatActivity{
         }
         return false;
     }*/
+
+
+    private void calculateRanking(String summe, String rank) {
+
+        int ranking = Integer.parseInt(summe) / Integer.parseInt(rank);
+
+        if (ranking == 1) {
+            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
+            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_1);
+        } else if (ranking == 2) {
+            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
+            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_2);
+        } else if (ranking == 3) {
+            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
+            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_3);
+        } else if (ranking == 4) {
+            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
+            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_4);
+        } else if (ranking == 5) {
+            ImageView rankinImage = (ImageView) findViewById(R.id.bewertung);
+            rankinImage.setImageResource(R.drawable.stern_ohne_hintergrund_5);
+
+        }
+    }
+
+    private void showVarification(Boolean varificationEmail, Boolean varificationPass, Boolean varificationPhone) {
+
+        if (varificationEmail) {
+            varification_email.setImageResource(R.drawable.email_checked);
+        }
+        if (varificationPass) {
+            varification_pass.setImageResource(R.drawable.pass_checked);
+        }
+        if (varificationPhone) {
+            varification_email.setImageResource(R.drawable.smartphone_checked);
+        }
+    }
 }
-
-
-
-
-/* listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                int height = 0;
-
-                for (int i = 0; i < listView.getChildCount(); i++) {
-                    int height1 = listView.getChildAt(i).getMeasuredHeight();
-                    int height2 = listView.getDividerHeight();
-
-                    height += listView.getChildAt(i).getMeasuredHeight();
-                    height += listView.getDividerHeight();
-                }
-                listView.getLayoutParams().height = (height);
-           }
-        });
-
-        // Listview Group collapsed listener
-        listView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                listView.getLayoutParams().height = listView.getLayoutParams().height-90;
-            }
-        });
-*/

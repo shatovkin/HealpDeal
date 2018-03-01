@@ -115,4 +115,5 @@
     <string name="title_activity_google">Google_Activity</string>
     <string name="title_activity_user_profile_">UserProfile_Activity</string>
     <string name="title_activity_observed_person_list_">ObservedPersonList_Activity</string>
+    <string name="preis_per_hour">Pro Stunde: </string>
 </resources>
